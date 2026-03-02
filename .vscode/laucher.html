@@ -1,32 +1,98 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CriptoMaster</title>
+    <title>Sabaton Cryptography</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="header">
-    <h1>Sabaton</h1>
-    <button>Info</button>
-    <button>Donate</button>
-    <button>Connect</button>
+
+<!-- TOP HEADER -->
+<header id="header">
+    <div class="logo">Sabaton</div>
+    <nav class="top-nav">
+        <button>Info</button>
+        <button>Donate</button>
+        <button>Contact</button>
+    </nav>
+</header>
+
+<!-- PAGE LAYOUT -->
+<div id="layout">
+
+    <!-- LEFT SIDEBAR -->
+    <aside id="ciphers">
+        <h2>Ciphers</h2>
+
+        <h3>Classical</h3>
+        <ul>
+            <li><a href="caesar.html">Affine / Caesar</a></li>
+            <li><a href="vigenere.html">Vigenère</a></li>
+            <li><a href="scytale.html">Scytale</a></li>
+            <li><a href="transposition.html">Transposition</a></li>
+            <li><a href="hill.html">Hill</a></li>
+            <li><a href="bifid.html">Bifid</a></li>
+            <li><a href="fleissner.html">Fleissner Grille</a></li>
+        </ul>
+
+        <h3>Mechanical</h3>
+        <ul>
+            <li><a href="enigma.html">Enigma</a></li>
+        </ul>
+
+        <h3>Modern</h3>
+        <ul>
+            <li><a href="aes.html">AES</a></li>
+            <li><a href="rsa.html">RSA</a></li>
+            <li><a href="elgamal.html">ElGamal</a></li>
+            <li><a href="rabin.html">Rabin</a></li>
+            <li><a href="elliptic.html">Elliptic Curve</a></li>
+            <li><a href="knapsack.html">Knapsack</a></li>
+        </ul>
+
+        <h3>Hashes</h3>
+        <ul>
+            <li><a href="sha1.html">SHA-1</a></li>
+            <li><a href="sha256.html">SHA-256</a></li>
+            <li><a href="crc32.html">CRC32</a></li>
+            <li><a href="murmur.html">Murmur3</a></li>
+            <li><a href="xxhash.html">xxHash</a></li>
+        </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main id="main">
+        <h1>Welcome to Sabaton</h1>
+
+        <p>
+            Sabaton is an educational cryptography toolkit that lets you explore,
+            encrypt, decrypt, and analyze messages using classical and modern ciphers.
+        </p>
+
+        <section class="info-box">
+            <h2>What is this?</h2>
+            <p>
+                This project is built around a high-performance cryptographic backend
+                written in C, exposed through a clean and accessible web interface.
+            </p>
+        </section>
+
+        <section class="info-box">
+            <h2>How to use</h2>
+            <ul>
+                <li>Select a cipher from the left</li>
+                <li>Enter text and keys in the form</li>
+                <li>Encrypt or decrypt instantly</li>
+            </ul>
+        </section>
+    </main>
+
 </div>
-<div id="ciphers">
-    <h2>Ciphers</h2>
-    <ul>
-        <li><a href="caesar.html">Caesar Cipher</a></li>
-        <li><a href="vigenere.html">Vigenère Cipher</a></li>
-        <li><a href="playfair.html">Playfair Cipher</a></li>
-        <li><a href="enigma.html">Enigma Machine</a></li>
-    </ul>
-</div>
-<div id="main">
-    <p>Welecome to Sabaton!</p>
-    <pre>
-        Sabaton is a cryptography tool that allows you to decrypt messages using various ciphers.
-    </pre>
-</div>
+
+<footer id="footer">
+    <p>© 2026 Sabaton — Cryptography Playground</p>
+</footer>
+
 </body>
 </html>
