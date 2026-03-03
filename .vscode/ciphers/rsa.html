@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Sabaton – Rabin Cipher</title>
+<title>Sabaton – RSA Cipher</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -17,7 +17,6 @@ body {
     height: 100vh;
 }
 
-/* Top bar */
 #header {
     grid-column: 1 / 3;
     background: #1c1c1c;
@@ -38,11 +37,9 @@ body {
     cursor: pointer;
 }
 
-/* Sidebar */
 #sidebar {
     background: #161616;
     padding: 15px;
-    overflow-y: auto;
 }
 #sidebar h2 {
     font-size: 18px;
@@ -57,7 +54,6 @@ body {
     color: #fff;
 }
 
-/* Main content */
 #main {
     padding: 20px;
 }
@@ -68,7 +64,7 @@ label {
     font-weight: bold;
 }
 
-input, textarea {
+input, textarea, select {
     width: 100%;
     background: #222;
     color: #eee;
@@ -79,7 +75,6 @@ input, textarea {
 
 textarea {
     min-height: 100px;
-    resize: vertical;
 }
 
 button.action {
@@ -89,10 +84,6 @@ button.action {
     color: white;
     border: none;
     cursor: pointer;
-}
-
-button.action:hover {
-    background: #0050a0;
 }
 
 #output {
@@ -107,7 +98,6 @@ button.action:hover {
 
 <body>
 
-<!-- HEADER -->
 <div id="header">
     <h1>Sabaton</h1>
     <button>Info</button>
@@ -115,55 +105,54 @@ button.action:hover {
     <button>Contact</button>
 </div>
 
-<!-- SIDEBAR -->
 <div id="sidebar">
     <h2>Ciphers</h2>
-    <a href="rabin.html"><b>Rabin</b></a>
-    <a href="rsa.html">RSA</a>
-    <a href="vigenere.html">Vigenère</a>
-    <a href="aes.html">AES</a>
-    <a href="enigma.html">Enigma</a>
+    <a href="rabin.html">Rabin</a>
+    <a href="rsa.html"><b>RSA</b></a>
 </div>
 
-<!-- MAIN -->
 <div id="main">
-    <h2>Rabin Decryption</h2>
+    <h2>RSA Decryption</h2>
 
     <label>Alphabet</label>
     <input id="alph" value="aąbcčdeęėfghiįyjklmnoprsštuųūvzž ">
 
+    <label>Mode</label>
+    <select id="mode">
+        <option value="normal">Normal</option>
+        <option value="mod">Common Modulus</option>
+        <option value="derive">Derive d</option>
+    </select>
+
     <label>Ciphertext (decimal)</label>
     <textarea id="cipher"></textarea>
 
-    <label>p</label>
-    <input id="p">
+    <label>Fragment (frag)</label>
+    <textarea id="frag"
+placeholder="Normal: [n,e,d]:[n,e,d]
+Mod: mod:[n,e,c]|[n,e,c]
+Derive: derive:n:e1:d1:e2"></textarea>
 
-    <label>q</label>
-    <input id="q">
-
-    <button class="action" onclick="runRabin()">Decrypt</button>
+    <button class="action" onclick="runRSA()">Run RSA</button>
 
     <label>Output</label>
     <div id="output">(waiting)</div>
 </div>
 
 <script>
-function runRabin() {
+function runRSA() {
     const alph   = document.getElementById("alph").value;
     const cipher = document.getElementById("cipher").value.trim();
-    const p      = document.getElementById("p").value.trim();
-    const q      = document.getElementById("q").value.trim();
+    const frag   = document.getElementById("frag").value.trim();
     const output = document.getElementById("output");
 
-    if (!cipher || !p || !q) {
-        output.textContent = "ERROR: Missing input";
+    if (!frag) {
+        output.textContent = "ERROR: frag is required";
         return;
     }
 
-    const frag = `${cipher}|${p}|${q}`;
-
     const url =
-        "http://localhost:8080/rabin" +
+        "http://localhost:8080/rsa" +
         "?alph="   + encodeURIComponent(alph) +
         "&cipher=" + encodeURIComponent(cipher) +
         "&frag="   + encodeURIComponent(frag);
