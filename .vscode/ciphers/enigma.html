@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Enigma Decoder</title>
+<style>
+body{font-family:Arial;margin:40px;background:#111;color:#eee}
+input,textarea{width:100%;margin:5px 0;padding:8px}
+button{padding:10px 20px;font-size:16px}
+#result{margin-top:20px;background:#222;padding:15px}
+</style>
+</head>
+
+<body>
+
+<h2>Enigma Decryption</h2>
+
+<label>Alphabet</label>
+<input id="alph" value="ABCDEFGHIJKLMNOPQRSTUVWXYZ">
+
+<label>Cipher</label>
+<textarea id="cipher" rows="3"></textarea>
+
+<label>Rotor 1 (CSV)</label>
+<input id="r1">
+
+<label>Rotor 2 (CSV)</label>
+<input id="r2">
+
+<label>Reflector (optional)</label>
+<input id="ref">
+
+<label>Key (ex: 12,20 or 19)</label>
+<input id="key">
+
+<label>Plain hint (optional)</label>
+<input id="plain">
+
+<br><br>
+<button onclick="decode()">Decode</button>
+
+<div id="result"></div>
+
+<script>
+
+function decode(){
+
+let alph = encodeURIComponent(document.getElementById("alph").value);
+let cipher = encodeURIComponent(document.getElementById("cipher").value);
+
+let r1 = document.getElementById("r1").value;
+let r2 = document.getElementById("r2").value;
+let ref = document.getElementById("ref").value;
+let key = document.getElementById("key").value;
+let plain = document.getElementById("plain").value;
+
+let frag = "R1:"+r1+"|R2:"+r2;
+
+if(ref.length>0) frag += "|REF:"+ref;
+if(key.length>0) frag += "|KEY:"+key;
+if(plain.length>0) frag += "|PLAIN:"+plain;
+
+frag = encodeURIComponent(frag);
+
+let url = "http://localhost:8080/enigma?alph="+alph+"&cipher="+cipher+"&frag="+frag;
+
+fetch(url)
+.then(r=>r.text())
+.then(t=>{
+document.getElementById("result").innerText=t;
+});
+
+}
+
+</script>
+
+</body>
+</html>
