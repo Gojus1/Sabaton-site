@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Stream Cipher Decoder</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 2rem; background: #f5f5f5; }
+h1 { color: #333; }
+input, textarea, button { font-size: 1rem; margin: 0.5rem 0; width: 100%; padding: 0.5rem; }
+button { width: auto; cursor: pointer; background: #4CAF50; color: white; border: none; border-radius: 5px; }
+#result { white-space: pre-wrap; background: #fff; padding: 1rem; border: 1px solid #ccc; border-radius: 5px; margin-top: 1rem; }
+</style>
+</head>
+<body>
+
+<h1>Stream Cipher Decoder</h1>
+
+<label for="cipher">Cipher (comma-separated numbers, e.g., [234,144,51,...]):</label>
+<textarea id="cipher" rows="4" placeholder="Enter numeric array"></textarea>
+
+<label for="frag">Fragment (e.g., LFSR info like '8;BE'):</label>
+<input type="text" id="frag" placeholder="Enter frag info">
+
+<label for="alph">Alphabet (optional, default A-Z + space):</label>
+<input type="text" id="alph" placeholder="ABCDEFGHIJKLMNOPQRSTUVWXYZ ">
+
+<button onclick="decodeStream()">Decode</button>
+
+<h2>Result:</h2>
+<div id="result">Waiting for input...</div>
+
+<script>
+async function decodeStream() {
+    const cipher = document.getElementById('cipher').value.trim();
+    const frag = document.getElementById('frag').value.trim();
+    const alph = document.getElementById('alph').value.trim();
+
+    if (!cipher || !frag) {
+        alert("Please enter both cipher and frag!");
+        return;
+    }
+
+    const params = new URLSearchParams();
+    params.set('cipher', cipher);
+    params.set('frag', frag);
+    if (alph) params.set('alph', alph);
+
+    const url = `http://localhost:8080/stream?${params.toString()}`;
+    const resultDiv = document.getElementById('result');
+    resultDiv.textContent = "Decoding...";
+
+    try {
+        const res = await fetch(url);
+        const text = await res.text();
+        resultDiv.textContent = text;
+    } catch (e) {
+        resultDiv.textContent = "Error: " + e;
+    }
+}
+</script>
+
+</body>
+</html>

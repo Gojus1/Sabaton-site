@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Shamir Cipher Test</title>
+</head>
+
+<body>
+
+<h2>Shamir Secret Sharing Decoder</h2>
+
+<label>Alphabet</label><br>
+<input id="alph" size="60"
+value="AĄBCČDEĘĖFGHIĮYJKLMNOPRSŠTUŲŪVZŽ"><br><br>
+
+<h3>X values</h3>
+<input id="x1"> 
+<input id="x2"> 
+<input id="x3"><br><br>
+
+<h3>S values</h3>
+<input id="s1">
+<input id="s2">
+<input id="s3"><br><br>
+
+<h3>Prime (p)</h3>
+<input id="p"><br><br>
+
+<button onclick="run()">Decode</button>
+
+<h3>Server Response</h3>
+<pre id="result"></pre>
+
+<script>
+
+function run()
+{
+    const alph = document.getElementById("alph").value;
+
+    const x = [
+        document.getElementById("x1").value,
+        document.getElementById("x2").value,
+        document.getElementById("x3").value
+    ];
+
+    const s = [
+        document.getElementById("s1").value,
+        document.getElementById("s2").value,
+        document.getElementById("s3").value
+    ];
+
+    const p = document.getElementById("p").value;
+
+    const frag =
+        x.join(",") + "|" +
+        s.join(",") + "|" +
+        p;
+
+    const url =
+        "http://localhost:8080/shamir?"
+        + "alph=" + encodeURIComponent(alph)
+        + "&cipher="
+        + "&frag=" + encodeURIComponent(frag);
+
+    fetch(url)
+    .then(r => r.text())
+    .then(t => document.getElementById("result").textContent = t);
+}
+
+</script>
+
+</body>
+</html>
