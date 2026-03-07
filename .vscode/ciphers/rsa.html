@@ -9,7 +9,7 @@
 <body>
 
 <header id="header">
-<div class="logo">Sabaton</div>
+<div class="logo" id="logo">Sabaton</div>
 <nav class="top-nav">
 <button>Info</button>
 <button>Donate</button>
@@ -78,7 +78,11 @@ fetch(url)
 .catch(e=>output.textContent=e);
 
 }
-
+  const logo = document.getElementById('logo');
+  logo.style.cursor = 'pointer';
+  logo.addEventListener('click', () => {
+    window.location.href = '/.vscode/laucher.html';
+  });
 </script>
 
 </body>

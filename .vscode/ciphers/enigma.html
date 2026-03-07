@@ -9,7 +9,7 @@
 <body>
 
 <header id="header">
-<div class="logo">Sabaton</div>
+<div class="logo" id="logo">Sabaton</div>
 <nav class="top-nav">
 <button>Info</button>
 <button>Donate</button>
@@ -48,13 +48,13 @@
 <label>Rotor 2 (CSV)</label>
 <input id="r2">
 
-<label>Reflector</label>
+<label>Reflector (Optional)</label>
 <input id="ref">
 
 <label>Key</label>
 <input id="key">
 
-<label>Plain hint</label>
+<label>Plain hint (Optional)</label>
 <input id="plain">
 
 <button class="action" onclick="decode()">Decode</button>
@@ -99,6 +99,12 @@ fetch(url)
 .catch(e=>result.textContent=e);
 
 }
+
+  const logo = document.getElementById('logo');
+  logo.style.cursor = 'pointer';
+  logo.addEventListener('click', () => {
+    window.location.href = '/.vscode/laucher.html';
+  });
 
 </script>
 

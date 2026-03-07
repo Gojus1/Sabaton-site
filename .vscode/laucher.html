@@ -11,7 +11,7 @@
 <body>
 
 <header id="header">
-    <div class="logo">Sabaton</div>
+    <div class="logo" id="logo">Dcipher.me</div>
 
     <nav class="top-nav">
         <button>Info</button>
@@ -71,6 +71,14 @@ decryption or analysis.
 <footer id="footer">
 © 2026 Sabaton
 </footer>
+
+<script>
+  const logo = document.getElementById('logo');
+  logo.style.cursor = 'pointer';
+  logo.addEventListener('click', () => {
+    window.location.href = '/.vscode/laucher.html';
+  });
+</script>
 
 </body>
 </html>
