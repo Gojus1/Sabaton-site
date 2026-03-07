@@ -30,7 +30,7 @@ function runFeistel(){
     const cipher = encodeURIComponent(document.getElementById('cipher').value);
     const frag = encodeURIComponent(document.getElementById('frag').value);
 
-    const url = `http://localhost:8080/feistel?cipher=${cipher}&frag=${frag}`;
+    const url = `https://sabaton.gojus-kastenas123.workers.dev/ciphers/feistel?cipher=${cipher}&frag=${frag}`;
     fetch(url)
         .then(r => r.text())
         .then(txt => document.getElementById('output').textContent = txt)
