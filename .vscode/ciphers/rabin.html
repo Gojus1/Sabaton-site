@@ -2,179 +2,89 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Sabaton – Rabin Cipher</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #111;
-    color: #eee;
-    display: grid;
-    grid-template-columns: 240px 1fr;
-    grid-template-rows: 60px 1fr;
-    height: 100vh;
-}
-
-/* Top bar */
-#header {
-    grid-column: 1 / 3;
-    background: #1c1c1c;
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-}
-#header h1 {
-    flex: 1;
-    margin: 0;
-}
-#header button {
-    margin-left: 10px;
-    background: #333;
-    color: #eee;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-}
-
-/* Sidebar */
-#sidebar {
-    background: #161616;
-    padding: 15px;
-    overflow-y: auto;
-}
-#sidebar h2 {
-    font-size: 18px;
-}
-#sidebar a {
-    display: block;
-    color: #bbb;
-    text-decoration: none;
-    margin: 6px 0;
-}
-#sidebar a:hover {
-    color: #fff;
-}
-
-/* Main content */
-#main {
-    padding: 20px;
-}
-
-label {
-    display: block;
-    margin-top: 12px;
-    font-weight: bold;
-}
-
-input, textarea {
-    width: 100%;
-    background: #222;
-    color: #eee;
-    border: 1px solid #444;
-    padding: 8px;
-    margin-top: 4px;
-}
-
-textarea {
-    min-height: 100px;
-    resize: vertical;
-}
-
-button.action {
-    margin-top: 16px;
-    padding: 10px 16px;
-    background: #0066cc;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-button.action:hover {
-    background: #0050a0;
-}
-
-#output {
-    white-space: pre-wrap;
-    background: #000;
-    border: 1px solid #444;
-    padding: 10px;
-    margin-top: 16px;
-}
-</style>
+<title>Sabaton – Rabin</title>
+<link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
 
-<!-- HEADER -->
-<div id="header">
-    <h1>Sabaton</h1>
-    <button>Info</button>
-    <button>Donate</button>
-    <button>Contact</button>
-</div>
+<header id="header">
+<div class="logo">Sabaton</div>
+<nav class="top-nav">
+<button>Info</button>
+<button>Donate</button>
+<button>Contact</button>
+</nav>
+</header>
 
-<!-- SIDEBAR -->
-<div id="sidebar">
-    <h2>Ciphers</h2>
-    <a href="rabin.html"><b>Rabin</b></a>
-    <a href="rsa.html">RSA</a>
-    <a href="vigenere.html">Vigenère</a>
-    <a href="aes.html">AES</a>
-    <a href="enigma.html">Enigma</a>
-</div>
+<div id="layout">
 
-<!-- MAIN -->
-<div id="main">
-    <h2>Rabin Decryption</h2>
+<aside id="ciphers">
+<h2>Ciphers</h2>
+<ul>
+<li><a href="enigma.html">Enigma</a></li>
+<li><a href="shamir.html">Shamir</a></li>
+<li><a href="rsa.html">RSA</a></li>
+<li><a href="rabin.html"><b>Rabin</b></a></li>
+<li><a href="stream.html">Stream</a></li>
+</ul>
+</aside>
 
-    <label>Alphabet</label>
-    <input id="alph" value="aąbcčdeęėfghiįyjklmnoprsštuųūvzž ">
+<main id="main">
 
-    <label>Ciphertext (decimal)</label>
-    <textarea id="cipher"></textarea>
+<h1>Rabin Cipher</h1>
 
-    <label>p</label>
-    <input id="p">
+<section class="panel">
 
-    <label>q</label>
-    <input id="q">
+<label>Alphabet</label>
+<input id="alph" value="aąbcčdeęėfghiįyjklmnoprsštuųūvzž ">
 
-    <button class="action" onclick="runRabin()">Decrypt</button>
+<label>Ciphertext</label>
+<textarea id="cipher"></textarea>
 
-    <label>Output</label>
-    <div id="output">(waiting)</div>
+<label>p</label>
+<input id="p">
+
+<label>q</label>
+<input id="q">
+
+<button class="action" onclick="runRabin()">Decrypt</button>
+
+<div id="output" class="output">(waiting)</div>
+
+</section>
+
+</main>
 </div>
 
 <script>
-function runRabin() {
-    const alph   = document.getElementById("alph").value;
-    const cipher = document.getElementById("cipher").value.trim();
-    const p      = document.getElementById("p").value.trim();
-    const q      = document.getElementById("q").value.trim();
-    const output = document.getElementById("output");
 
-    if (!cipher || !p || !q) {
-        output.textContent = "ERROR: Missing input";
-        return;
-    }
+function runRabin(){
 
-    const frag = `${cipher}|${p}|${q}`;
+const alph = document.getElementById("alph").value;
+const cipher = document.getElementById("cipher").value.trim();
+const p = document.getElementById("p").value.trim();
+const q = document.getElementById("q").value.trim();
 
-    const url =
-        "http://localhost:8080/rabin" +
-        "?alph="   + encodeURIComponent(alph) +
-        "&cipher=" + encodeURIComponent(cipher) +
-        "&frag="   + encodeURIComponent(frag);
+let output = document.getElementById("output");
 
-    output.textContent = "Running...";
+const frag = `${cipher}|${p}|${q}`;
 
-    fetch(url)
-        .then(r => r.text())
-        .then(t => output.textContent = t)
-        .catch(e => output.textContent = "ERROR: " + e);
+const url =
+"http://localhost:8080/rabin"
++ "?alph=" + encodeURIComponent(alph)
++ "&cipher=" + encodeURIComponent(cipher)
++ "&frag=" + encodeURIComponent(frag);
+
+output.textContent="Running...";
+
+fetch(url)
+.then(r=>r.text())
+.then(t=>output.textContent=t)
+.catch(e=>output.textContent=e);
+
 }
+
 </script>
 
 </body>

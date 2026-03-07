@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sabaton Cryptography</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sabaton</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="favicon.png" type="image/png">
 </head>
+
 <body>
 
-<!-- TOP HEADER -->
 <header id="header">
     <div class="logo">Sabaton</div>
+
     <nav class="top-nav">
         <button>Info</button>
         <button>Donate</button>
@@ -18,54 +20,56 @@
     </nav>
 </header>
 
-<!-- PAGE LAYOUT -->
 <div id="layout">
 
-    <!-- LEFT SIDEBAR -->
-    <aside id="ciphers">
-        <h2>Ciphers</h2>
+<aside id="ciphers">
+<h2>Ciphers</h2>
 
-        <ul>
-            <li><a href="ciphers/enigma.html">Enigma</a></li>
-            <li><a href="ciphers/shamir.html">Shamir</a></li>
-            <!-- <li><a href="ciphers/feistel.html">Feistel</a></li> -->
-            <li><a href="ciphers/rsa.html">RSA</a></li>
-            <li><a href="ciphers/rabin.html">Rabin</a></li>
-            <li><a href="ciphers/stream.html">Stream</a></li>
-        </ul>
-    </aside>
+<ul>
+<li><a href="ciphers/enigma.html">Enigma</a></li>
+<li><a href="ciphers/shamir.html">Shamir</a></li>
+<li><a href="ciphers/rsa.html">RSA</a></li>
+<li><a href="ciphers/rabin.html">Rabin</a></li>
+<li><a href="ciphers/stream.html">Stream</a></li>
+</ul>
+</aside>
 
-    <!-- MAIN CONTENT -->
-    <main id="main">
-        <h1>Welcome to Sabaton</h1>
+<main id="main">
 
-        <p>
-            Sabaton is an educational cryptography toolkit that lets you explore,
-            encrypt, decrypt, and analyze messages using classical and modern ciphers.
-        </p>
+<h1>Sabaton</h1>
 
-        <section class="info-box">
-            <h2>What is this?</h2>
-            <p>
-                This project is built around a high-performance cryptographic backend
-                written in C, exposed through a clean and accessible web interface.
-            </p>
-        </section>
+<p>
+Sabaton is a cryptography toolkit for experimenting with classical and modern ciphers.
+Select a cipher from the left sidebar to begin.
+</p>
 
-        <section class="info-box">
-            <h2>How to use</h2>
-            <ul>
-                <li>Select a cipher from the left</li>
-                <li>Enter text and keys in the form</li>
-                <li>Encrypt or decrypt instantly</li>
-            </ul>
-        </section>
-    </main>
+<section class="panel">
+
+<p>
+The system connects a C cryptographic backend with a simple web interface.
+Each tool allows you to enter cipher text and parameters and immediately run
+decryption or analysis.
+</p>
+
+</section>
+
+<section class="panel">
+
+<ul>
+<li>Select a cipher from the sidebar</li>
+<li>Enter ciphertext and parameters</li>
+<li>Run the decoder</li>
+<li>View results instantly</li>
+</ul>
+
+</section>
+
+</main>
 
 </div>
 
 <footer id="footer">
-    <p>© 2026 Sabaton — Cryptography Playground</p>
+© 2026 Sabaton
 </footer>
 
 </body>

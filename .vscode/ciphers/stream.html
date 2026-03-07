@@ -2,61 +2,96 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Stream Cipher Decoder</title>
-<style>
-body { font-family: Arial, sans-serif; margin: 2rem; background: #f5f5f5; }
-h1 { color: #333; }
-input, textarea, button { font-size: 1rem; margin: 0.5rem 0; width: 100%; padding: 0.5rem; }
-button { width: auto; cursor: pointer; background: #4CAF50; color: white; border: none; border-radius: 5px; }
-#result { white-space: pre-wrap; background: #fff; padding: 1rem; border: 1px solid #ccc; border-radius: 5px; margin-top: 1rem; }
-</style>
+<title>Sabaton – Stream Cipher</title>
+<link rel="stylesheet" href="../style.css">
 </head>
+
 <body>
 
-<h1>Stream Cipher Decoder</h1>
+<header id="header">
+<div class="logo">Sabaton</div>
 
-<label for="cipher">Cipher (comma-separated numbers, e.g., [234,144,51,...]):</label>
-<textarea id="cipher" rows="4" placeholder="Enter numeric array"></textarea>
+<nav class="top-nav">
+<button>Info</button>
+<button>Donate</button>
+<button>Contact</button>
+</nav>
+</header>
 
-<label for="frag">Fragment (e.g., LFSR info like '8;BE'):</label>
-<input type="text" id="frag" placeholder="Enter frag info">
+<div id="layout">
 
-<label for="alph">Alphabet (optional, default A-Z + space):</label>
-<input type="text" id="alph" placeholder="ABCDEFGHIJKLMNOPQRSTUVWXYZ ">
+<aside id="ciphers">
 
-<button onclick="decodeStream()">Decode</button>
+<h2>Ciphers</h2>
 
-<h2>Result:</h2>
-<div id="result">Waiting for input...</div>
+<ul>
+<li><a href="enigma.html">Enigma</a></li>
+<li><a href="shamir.html">Shamir</a></li>
+<li><a href="rsa.html">RSA</a></li>
+<li><a href="rabin.html">Rabin</a></li>
+<li><a href="stream.html"><b>Stream</b></a></li>
+</ul>
+
+</aside>
+
+<main id="main">
+
+<h1>Stream Cipher</h1>
+
+<section class="panel">
+
+<label>Cipher</label>
+<textarea id="cipher"></textarea>
+
+<label>Fragment</label>
+<input id="frag">
+
+<label>Alphabet</label>
+<input id="alph" placeholder="ABCDEFGHIJKLMNOPQRSTUVWXYZ ">
+
+<button class="action" onclick="decodeStream()">Decode</button>
+
+<div id="result" class="output">Waiting for input...</div>
+
+</section>
+
+</main>
+
+</div>
 
 <script>
+
 async function decodeStream() {
-    const cipher = document.getElementById('cipher').value.trim();
-    const frag = document.getElementById('frag').value.trim();
-    const alph = document.getElementById('alph').value.trim();
 
-    if (!cipher || !frag) {
-        alert("Please enter both cipher and frag!");
-        return;
-    }
+const cipher = document.getElementById('cipher').value.trim();
+const frag = document.getElementById('frag').value.trim();
+const alph = document.getElementById('alph').value.trim();
 
-    const params = new URLSearchParams();
-    params.set('cipher', cipher);
-    params.set('frag', frag);
-    if (alph) params.set('alph', alph);
+const params = new URLSearchParams();
+params.set('cipher', cipher);
+params.set('frag', frag);
+if (alph) params.set('alph', alph);
 
-    const url = `http://localhost:8080/stream?${params.toString()}`;
-    const resultDiv = document.getElementById('result');
-    resultDiv.textContent = "Decoding...";
+const url = `http://localhost:8080/stream?${params.toString()}`;
 
-    try {
-        const res = await fetch(url);
-        const text = await res.text();
-        resultDiv.textContent = text;
-    } catch (e) {
-        resultDiv.textContent = "Error: " + e;
-    }
+const resultDiv = document.getElementById('result');
+resultDiv.textContent = "Running...";
+
+try {
+
+const res = await fetch(url);
+const text = await res.text();
+
+resultDiv.textContent = text;
+
+} catch (e) {
+
+resultDiv.textContent = "Error: " + e;
+
 }
+
+}
+
 </script>
 
 </body>

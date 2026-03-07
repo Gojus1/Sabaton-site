@@ -1,25 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Enigma Decoder</title>
-<style>
-body{font-family:Arial;margin:40px;background:#111;color:#eee}
-input,textarea{width:100%;margin:5px 0;padding:8px}
-button{padding:10px 20px;font-size:16px}
-#result{margin-top:20px;background:#222;padding:15px}
-</style>
+<title>Sabaton – Enigma</title>
+<link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
 
-<h2>Enigma Decryption</h2>
+<header id="header">
+<div class="logo">Sabaton</div>
+<nav class="top-nav">
+<button>Info</button>
+<button>Donate</button>
+<button>Contact</button>
+</nav>
+</header>
+
+<div id="layout">
+
+<aside id="ciphers">
+<h2>Ciphers</h2>
+<ul>
+<li><a href="enigma.html"><b>Enigma</b></a></li>
+<li><a href="shamir.html">Shamir</a></li>
+<li><a href="rsa.html">RSA</a></li>
+<li><a href="rabin.html">Rabin</a></li>
+<li><a href="stream.html">Stream</a></li>
+</ul>
+</aside>
+
+<main id="main">
+
+<h1>Enigma</h1>
+
+<section class="panel">
 
 <label>Alphabet</label>
 <input id="alph" value="ABCDEFGHIJKLMNOPQRSTUVWXYZ">
 
 <label>Cipher</label>
-<textarea id="cipher" rows="3"></textarea>
+<textarea id="cipher"></textarea>
 
 <label>Rotor 1 (CSV)</label>
 <input id="r1">
@@ -27,19 +48,23 @@ button{padding:10px 20px;font-size:16px}
 <label>Rotor 2 (CSV)</label>
 <input id="r2">
 
-<label>Reflector (optional)</label>
+<label>Reflector</label>
 <input id="ref">
 
-<label>Key (ex: 12,20 or 19)</label>
+<label>Key</label>
 <input id="key">
 
-<label>Plain hint (optional)</label>
+<label>Plain hint</label>
 <input id="plain">
 
-<br><br>
-<button onclick="decode()">Decode</button>
+<button class="action" onclick="decode()">Decode</button>
 
-<div id="result"></div>
+<div id="result" class="output">(waiting)</div>
+
+</section>
+
+</main>
+</div>
 
 <script>
 
@@ -62,13 +87,16 @@ if(plain.length>0) frag += "|PLAIN:"+plain;
 
 frag = encodeURIComponent(frag);
 
-let url = "http://localhost:8080/enigma?alph="+alph+"&cipher="+cipher+"&frag="+frag;
+let url =
+"http://localhost:8080/enigma?alph="+alph+"&cipher="+cipher+"&frag="+frag;
+
+let result = document.getElementById("result");
+result.textContent = "Running...";
 
 fetch(url)
 .then(r=>r.text())
-.then(t=>{
-document.getElementById("result").innerText=t;
-});
+.then(t=>result.textContent=t)
+.catch(e=>result.textContent=e);
 
 }
 

@@ -1,70 +1,104 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Shamir Cipher Test</title>
+<title>Sabaton – Shamir</title>
+<link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
 
-<h2>Shamir Secret Sharing Decoder</h2>
+<header id="header">
+<div class="logo">Sabaton</div>
+<nav class="top-nav">
+<button>Info</button>
+<button>Donate</button>
+<button>Contact</button>
+</nav>
+</header>
 
-<label>Alphabet</label><br>
-<input id="alph" size="60"
-value="AĄBCČDEĘĖFGHIĮYJKLMNOPRSŠTUŲŪVZŽ"><br><br>
+<div id="layout">
 
-<h3>X values</h3>
-<input id="x1"> 
-<input id="x2"> 
-<input id="x3"><br><br>
+<aside id="ciphers">
+<h2>Ciphers</h2>
+<ul>
+<li><a href="enigma.html">Enigma</a></li>
+<li><a href="shamir.html"><b>Shamir</b></a></li>
+<li><a href="rsa.html">RSA</a></li>
+<li><a href="rabin.html">Rabin</a></li>
+<li><a href="stream.html">Stream</a></li>
+</ul>
+</aside>
 
-<h3>S values</h3>
+<main id="main">
+
+<h1>Shamir Secret Sharing</h1>
+
+<section class="panel">
+
+<label>Alphabet</label>
+<input id="alph" value="AĄBCČDEĘĖFGHIĮYJKLMNOPRSŠTUŲŪVZŽ">
+
+<label>X values</label>
+<input id="x1">
+<input id="x2">
+<input id="x3">
+
+<label>S values</label>
 <input id="s1">
 <input id="s2">
-<input id="s3"><br><br>
+<input id="s3">
 
-<h3>Prime (p)</h3>
-<input id="p"><br><br>
+<label>Prime (p)</label>
+<input id="p">
 
-<button onclick="run()">Decode</button>
+<button class="action" onclick="run()">Decode</button>
 
-<h3>Server Response</h3>
-<pre id="result"></pre>
+<div id="result" class="output">(waiting)</div>
+
+</section>
+
+</main>
+</div>
 
 <script>
 
-function run()
-{
-    const alph = document.getElementById("alph").value;
+function run(){
 
-    const x = [
-        document.getElementById("x1").value,
-        document.getElementById("x2").value,
-        document.getElementById("x3").value
-    ];
+const alph = document.getElementById("alph").value;
 
-    const s = [
-        document.getElementById("s1").value,
-        document.getElementById("s2").value,
-        document.getElementById("s3").value
-    ];
+const x = [
+document.getElementById("x1").value,
+document.getElementById("x2").value,
+document.getElementById("x3").value
+];
 
-    const p = document.getElementById("p").value;
+const s = [
+document.getElementById("s1").value,
+document.getElementById("s2").value,
+document.getElementById("s3").value
+];
 
-    const frag =
-        x.join(",") + "|" +
-        s.join(",") + "|" +
-        p;
+const p = document.getElementById("p").value;
 
-    const url =
-        "http://localhost:8080/shamir?"
-        + "alph=" + encodeURIComponent(alph)
-        + "&cipher="
-        + "&frag=" + encodeURIComponent(frag);
+const frag =
+x.join(",") + "|" +
+s.join(",") + "|" +
+p;
 
-    fetch(url)
-    .then(r => r.text())
-    .then(t => document.getElementById("result").textContent = t);
+const url =
+"http://localhost:8080/shamir"
++ "?alph=" + encodeURIComponent(alph)
++ "&cipher="
++ "&frag=" + encodeURIComponent(frag);
+
+let result = document.getElementById("result");
+result.textContent = "Running...";
+
+fetch(url)
+.then(r=>r.text())
+.then(t=>result.textContent=t);
+
 }
 
 </script>
