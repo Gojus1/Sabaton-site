@@ -9,7 +9,7 @@
 <body>
 
 <header id="header">
-<div class="logo" id="logo">Sabaton</div>
+<div class="logo" id="logo">WHATSECRET</div>
 <nav class="top-nav">
 <button>Info</button>
 <button>Donate</button>
@@ -65,7 +65,7 @@ const frag = document.getElementById("frag").value.trim();
 let output = document.getElementById("output");
 
 const url =
-"https://64.23.173.13:8080/rsa"
+"http://64.23.173.13:8080/rsa"
 + "?alph=" + encodeURIComponent(alph)
 + "&cipher=" + encodeURIComponent(cipher)
 + "&frag=" + encodeURIComponent(frag);
@@ -81,7 +81,7 @@ fetch(url)
   const logo = document.getElementById('logo');
   logo.style.cursor = 'pointer';
   logo.addEventListener('click', () => {
-    window.location.href = '/.vscode/laucher.html';
+    window.location.href = '/.vscode/index.html';
   });
 </script>
 

@@ -122,6 +122,21 @@ body::before {
     overflow-y: auto;
 }
 
+#main1 {
+    flex: 1;
+    padding: 24px;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.main-inner1 {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    transform: translateX(-100px);
+}
+
 #main h1 {
     font-size: 22px;
     margin-top: 0;
