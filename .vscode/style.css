@@ -124,16 +124,30 @@ body::before {
 
 #main1 {
     flex: 1;
-    padding: 24px;
+    padding: 22px;
     overflow-y: auto;
+
     display: flex;
-    justify-content: center;
+    flex-direction: column;     /* stack elements vertically */
+    align-items: center;        /* horizontal center */
 }
 
 .main-inner1 {
     width: 100%;
-    max-width: 600px;
+    max-width: 700px;
+    height: 300px;
     text-align: center;
+    transform: translateX(-100px);
+}
+
+.main-inner2 {
+    margin-top: auto;           /* pushes it to bottom */
+
+    width: 100%;
+    height: 270px;
+    max-width: 1000px;
+    text-align: center;
+
     transform: translateX(-100px);
 }
 
@@ -212,4 +226,45 @@ button.action:hover {
     padding: 10px;
     text-align: center;
     font-size: 13px;
+}
+
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+.contact-box{
+    position: relative;
+    background: #1c1f38;
+    padding: 20px;
+    border-radius: 10px;
+    width: 500px;
+    height: 200px;
+    max-width: 90%;
+    text-align: center;
+}
+
+.contact-box .close-btn1 {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 6px 12px;
+  background: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+#contact-toggle{
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
 }
