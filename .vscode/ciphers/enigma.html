@@ -77,11 +77,11 @@ let ref = document.getElementById("ref").value;
 let key = document.getElementById("key").value;
 let plain = document.getElementById("plain").value;
 
-let frag = "R1:"+r1+"|R2:"+r2;
+let frag = "R1:"+r1+",R2:"+r2;
 
-if(ref.length>0) frag += "|REF:"+ref;
-if(key.length>0) frag += "|KEY:"+key;
-if(plain.length>0) frag += "|PLAIN:"+plain;
+if(ref.length>0) frag += ",REF:"+ref;
+if(key.length>0) frag += ",KEY:"+key;
+if(plain.length>0) frag += ",PLAIN:"+plain;
 
 frag = encodeURIComponent(frag);
 
